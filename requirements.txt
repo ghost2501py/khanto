@@ -1,0 +1,5 @@
+-c constraints.txt
+django
+djangorestframework
+pyyaml
+uritemplate
