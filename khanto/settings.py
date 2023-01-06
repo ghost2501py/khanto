@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'api',
     'properties',
     'listings',
+    'reservations',
 ]
 
 MIDDLEWARE = [
