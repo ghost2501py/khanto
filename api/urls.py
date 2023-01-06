@@ -3,8 +3,10 @@ from rest_framework.schemas import get_schema_view
 from django.urls import include, path
 from django.views.generic import TemplateView
 
+app_name = 'api'
+
 schema_url_patterns_v1 = [
-    path('api/v1/', include('api.v1.urls')),
+    path('api/v1/', include('api.v1.urls', namespace='v1')),
 ]
 
 schema_view = get_schema_view(

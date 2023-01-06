@@ -19,6 +19,7 @@ class Property(models.Model):
     class Meta:
         verbose_name = _('Property')
         verbose_name_plural = _('Properties')
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.code
