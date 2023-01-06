@@ -183,6 +183,7 @@ class PropertyTests(APITestCase):
             cleaning_price=20.0,
         )
 
+        self.assertEqual(Property.objects.count(), 1)
         url = reverse('api:v1:properties:property-detail', kwargs={'pk': property.id})
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)

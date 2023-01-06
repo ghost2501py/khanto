@@ -22,6 +22,7 @@ class Reservation(models.Model):
     class Meta:
         verbose_name = _('Reservation')
         verbose_name_plural = _('Reservations')
+        ordering = ['-created_at']
 
     def save(self, *args, **kwargs):
         self.code = uuid.uuid4().hex[:6].upper()
