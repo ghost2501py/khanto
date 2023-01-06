@@ -12,7 +12,7 @@ from ..models import Property
 class PropertyTests(APITestCase):
     def test_create_property(self):
         """
-        Ensure we can create a new account object.
+        Ensure we can create a new property object.
         """
         self.assertEqual(Property.objects.count(), 0)
 
