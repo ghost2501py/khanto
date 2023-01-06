@@ -1,0 +1,122 @@
+[
+{
+    "model": "reservations.reservation",
+    "pk": "7632a8b2-6180-40da-b8a2-4cea7dcc658a",
+    "fields": {
+        "code": "67DE97",
+        "check_in": "2023-01-06",
+        "check_out": "2023-01-07",
+        "price": "50.00",
+        "total_guests": 1,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "730b79bd-315c-4983-a619-015d7abb2ba8"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "518e6d6a-8982-4f0f-82b7-cf65202f06de",
+    "fields": {
+        "code": "88A3B6",
+        "check_in": "2023-01-10",
+        "check_out": "2023-01-15",
+        "price": "250.00",
+        "total_guests": 2,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "19320bfd-7da9-4436-8cd4-9e8d03eb2057"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "40006c55-f81f-4aa6-be58-151f43d4d1c0",
+    "fields": {
+        "code": "18AB85",
+        "check_in": "2023-01-09",
+        "check_out": "2023-01-11",
+        "price": "100.00",
+        "total_guests": 1,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "8f25446d-bb10-48c7-be8e-42598c86623b"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "2e5e7457-4bc1-4158-93ab-40aa3c1e4e89",
+    "fields": {
+        "code": "2F4D06",
+        "check_in": "2023-01-07",
+        "check_out": "2023-01-09",
+        "price": "100.00",
+        "total_guests": 1,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "730b79bd-315c-4983-a619-015d7abb2ba8"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "7a3b7f11-4b03-4baa-aeed-66ade1a9b0be",
+    "fields": {
+        "code": "0BB958",
+        "check_in": "2023-01-06",
+        "check_out": "2023-01-09",
+        "price": "300.00",
+        "total_guests": 2,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "19320bfd-7da9-4436-8cd4-9e8d03eb2057"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "bb174d6f-f3a7-4560-84d4-a7c13df353b8",
+    "fields": {
+        "code": "59BCAE",
+        "check_in": "2023-01-12",
+        "check_out": "2023-01-13",
+        "price": "50.00",
+        "total_guests": 1,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "8f25446d-bb10-48c7-be8e-42598c86623b"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "b101f1ba-3d2e-4160-be2a-11dfeaededcf",
+    "fields": {
+        "code": "191532",
+        "check_in": "2023-01-09",
+        "check_out": "2023-01-12",
+        "price": "150.00",
+        "total_guests": 3,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "730b79bd-315c-4983-a619-015d7abb2ba8"
+    }
+},
+{
+    "model": "reservations.reservation",
+    "pk": "5c97aedd-dd41-4204-8af9-8bba1dca146b",
+    "fields": {
+        "code": "837A42",
+        "check_in": "2023-01-15",
+        "check_out": "2023-01-20",
+        "price": "800.00",
+        "total_guests": 4,
+        "comments": "",
+        "created_at": "2023-01-06T14:03:46.000Z",
+        "updated_at": "2023-01-06T14:03:46.000Z",
+        "listing": "19320bfd-7da9-4436-8cd4-9e8d03eb2057"
+    }
+}
+]
