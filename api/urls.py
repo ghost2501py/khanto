@@ -20,7 +20,7 @@ urlpatterns = [
     path('api/v1/openapi/', schema_view, name='openapi-schema-v1'),
     path('api/v1/docs/', TemplateView.as_view(
         template_name='swagger-ui.html',
-        extra_context={'schema_url': 'openapi-schema-v1'}
+        extra_context={'schema_url': 'api:openapi-schema-v1'}
     ), name='swagger-ui'),
 ]
 urlpatterns += schema_url_patterns_v1
