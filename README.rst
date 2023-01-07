@@ -80,7 +80,6 @@ Add dependencies to requirements.txt:
 
    .. code-block:: text
 
-      # requirements.txt
       -c constraints.txt
       Django
       anotherdependency
