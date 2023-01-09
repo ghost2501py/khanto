@@ -12,6 +12,8 @@ from ..models import Listing
 
 
 class ListingTests(APITestCase):
+    maxDiff = None
+
     def setUp(self):
         self.property = Property.objects.create(
             code='property1',
@@ -39,59 +41,82 @@ class ListingTests(APITestCase):
         self.assertEqual(Listing.objects.count(), 1)
 
         listing = Listing.objects.get()
-        self.assertEqual(listing.platform, 'Airbnb')
-        self.assertEqual(listing.platform_fee, 5.0)
-
-        self.assertEqual({
+        self.assertDictEqual({
             'id': str(listing.id),
-            'platform': 'Airbnb',
-            'platform_fee': '5.00',
-            'property': self.property.id,
+            'platform': data['platform'],
+            'platform_fee': data['platform_fee'],
             'created_at': listing.created_at.isoformat().replace('+00:00', 'Z'),
             'updated_at': listing.updated_at.isoformat().replace('+00:00', 'Z'),
-        }, dict(response.data))
+            'property': {
+                'id': str(self.property.id),
+                'code': self.property.code,
+                'guest_limit': self.property.guest_limit,
+                'bathrooms': self.property.bathrooms,
+                'accept_pets': self.property.accept_pets,
+                'cleaning_price': '{:.2f}'.format(self.property.cleaning_price),
+                'activation_date': self.property.activation_date,
+                'created_at': self.property.created_at.isoformat().replace('+00:00', 'Z'),
+                'updated_at': self.property.updated_at.isoformat().replace('+00:00', 'Z'),
+            },
+        }, json.loads(json.dumps(response.data, cls=DjangoJSONEncoder)))
 
     def test_list_listing(self):
         """
         Ensure we can list listings.
         """
-        Listing.objects.bulk_create([
-            Listing(
-                platform='Airbnb',
-                platform_fee='5.00',
-                property=self.property,
-            ),
-            Listing(
-                platform='Cloudbeds',
-                platform_fee='4.00',
-                property=self.property,
-            ),
-        ])
+        listing1 = Listing.objects.create(
+            platform='Airbnb',
+            platform_fee=5.0,
+            property=self.property,
+        )
+        listing2 = Listing.objects.create(
+            platform='Cloudbeds',
+            platform_fee=4.0,
+            property=self.property,
+        )
 
         url = reverse('api:v1:listings:listing-list')
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
 
-        listing1 = Listing.objects.last()
-        listing2 = Listing.objects.first()
         self.assertEqual(
             [
                 {
                     'id': str(listing2.id),
-                    'platform': 'Cloudbeds',
-                    'platform_fee': '4.00',
-                    'property': str(self.property.id),
+                    'platform': listing2.platform,
+                    'platform_fee': '{:.2f}'.format(listing2.platform_fee),
                     'created_at': listing2.created_at.isoformat().replace('+00:00', 'Z'),
                     'updated_at': listing2.updated_at.isoformat().replace('+00:00', 'Z'),
+                    'property': {
+                        'id': str(self.property.id),
+                        'code': self.property.code,
+                        'guest_limit': self.property.guest_limit,
+                        'bathrooms': self.property.bathrooms,
+                        'accept_pets': self.property.accept_pets,
+                        'cleaning_price': '{:.2f}'.format(self.property.cleaning_price),
+                        'activation_date': self.property.activation_date,
+                        'created_at': self.property.created_at.isoformat().replace('+00:00', 'Z'),
+                        'updated_at': self.property.updated_at.isoformat().replace('+00:00', 'Z'),
+                    },
                 },
                 {
                     'id': str(listing1.id),
-                    'platform': 'Airbnb',
-                    'platform_fee': '5.00',
-                    'property': str(self.property.id),
+                    'platform': listing1.platform,
+                    'platform_fee': '{:.2f}'.format(listing1.platform_fee),
                     'created_at': listing1.created_at.isoformat().replace('+00:00', 'Z'),
                     'updated_at': listing1.updated_at.isoformat().replace('+00:00', 'Z'),
+                    'property': {
+                        'id': str(self.property.id),
+                        'code': self.property.code,
+                        'guest_limit': self.property.guest_limit,
+                        'bathrooms': self.property.bathrooms,
+                        'accept_pets': self.property.accept_pets,
+                        'cleaning_price': '{:.2f}'.format(self.property.cleaning_price),
+                        'activation_date': self.property.activation_date,
+                        'created_at': self.property.created_at.isoformat().replace('+00:00', 'Z'),
+                        'updated_at': self.property.updated_at.isoformat().replace('+00:00', 'Z'),
+                    },
                 }
             ],
             json.loads(json.dumps(response.data, cls=DjangoJSONEncoder)),
@@ -103,7 +128,7 @@ class ListingTests(APITestCase):
         """
         listing = Listing.objects.create(
             platform='Airbnb',
-            platform_fee='5.00',
+            platform_fee=5.0,
             property=self.property,
         )
 
@@ -111,14 +136,24 @@ class ListingTests(APITestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-        self.assertEqual({
+        self.assertDictEqual({
             'id': str(listing.id),
-            'platform': 'Airbnb',
-            'platform_fee': '5.00',
-            'property': self.property.id,
+            'platform': listing.platform,
+            'platform_fee': '{:.2f}'.format(listing.platform_fee),
             'created_at': listing.created_at.isoformat().replace('+00:00', 'Z'),
             'updated_at': listing.updated_at.isoformat().replace('+00:00', 'Z'),
-        }, dict(response.data))
+            'property': {
+                'id': str(self.property.id),
+                'code': self.property.code,
+                'guest_limit': self.property.guest_limit,
+                'bathrooms': self.property.bathrooms,
+                'accept_pets': self.property.accept_pets,
+                'cleaning_price': '{:.2f}'.format(self.property.cleaning_price),
+                'activation_date': self.property.activation_date,
+                'created_at': self.property.created_at.isoformat().replace('+00:00', 'Z'),
+                'updated_at': self.property.updated_at.isoformat().replace('+00:00', 'Z'),
+            },
+        }, json.loads(json.dumps(response.data, cls=DjangoJSONEncoder)))
 
     def test_update_listing(self):
         """
@@ -126,7 +161,7 @@ class ListingTests(APITestCase):
         """
         listing = Listing.objects.create(
             platform='Cloudbeds',
-            platform_fee='4.00',
+            platform_fee=4.0,
             property=self.property,
         )
 
@@ -148,9 +183,24 @@ class ListingTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
         listing.refresh_from_db()
-        self.assertEqual(listing.platform, 'Airbnb')
-        self.assertEqual(listing.platform_fee, 5.0)
-        self.assertEqual(listing.property, property2)
+        self.assertDictEqual({
+            'id': str(listing.id),
+            'platform': data['platform'],
+            'platform_fee': data['platform_fee'],
+            'created_at': listing.created_at.isoformat().replace('+00:00', 'Z'),
+            'updated_at': listing.updated_at.isoformat().replace('+00:00', 'Z'),
+            'property': {
+                'id': str(property2.id),
+                'code': property2.code,
+                'guest_limit': property2.guest_limit,
+                'bathrooms': property2.bathrooms,
+                'accept_pets': property2.accept_pets,
+                'cleaning_price': '{:.2f}'.format(property2.cleaning_price),
+                'activation_date': property2.activation_date,
+                'created_at': property2.created_at.isoformat().replace('+00:00', 'Z'),
+                'updated_at': property2.updated_at.isoformat().replace('+00:00', 'Z'),
+            },
+        }, json.loads(json.dumps(response.data, cls=DjangoJSONEncoder)))
 
     def test_delete_listing(self):
         """
@@ -158,10 +208,9 @@ class ListingTests(APITestCase):
         """
         listing = Listing.objects.create(
             platform='Cloudbeds',
-            platform_fee='4.00',
+            platform_fee=4.0,
             property=self.property,
         )
-
         self.assertEqual(Listing.objects.count(), 1)
         url = reverse('api:v1:listings:listing-detail', kwargs={'pk': listing.id})
         response = self.client.delete(url)

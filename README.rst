@@ -71,6 +71,12 @@ Command to run the tests:
 
       $ python manage.py test
 
+Or a test individually:
+
+   .. code-block:: bash
+
+      $ python manage.py test reservations.api_v1.tests.ReservationTests.test_create_reservation
+
 Requirements
 ============
 
